@@ -11,6 +11,8 @@ All notable changes to OpenOSK are recorded here. The format follows
   late, so a key repeated at about 22 per second instead of 30.
 - Numeric key pad keys act as Home, End, the arrows, Insert and Delete while Num Lock is off, as
   on a physical keyboard. They always typed digits.
+- Fade now makes the keyboard translucent. WPF strips the layered window style the previous
+  implementation set, so the window uses WPF's own opacity instead.
 
 ## [0.1.0] - 2026-09-07
 

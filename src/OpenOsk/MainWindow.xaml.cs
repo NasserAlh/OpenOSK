@@ -934,8 +934,9 @@ public partial class MainWindow : Window
 
     private void ApplyOpacity()
     {
-        var opacity = _faded && !_pointerOver ? _settings.FadeOpacity : 1.0;
-        WindowHelper.SetOpacity(this, opacity);
+        // WPF strips WS_EX_LAYERED from any window that does not use per-pixel opacity, so
+        // SetLayeredWindowAttributes cannot fade this window; AllowsTransparency plus Opacity can.
+        Opacity = _faded && !_pointerOver ? _settings.FadeOpacity : 1.0;
     }
 
     private void ShowOptions()
