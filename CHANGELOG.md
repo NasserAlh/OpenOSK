@@ -13,6 +13,8 @@ All notable changes to OpenOSK are recorded here. The format follows
   on a physical keyboard. They always typed digits.
 - Fade now makes the keyboard translucent. WPF strips the layered window style the previous
   implementation set, so the window uses WPF's own opacity instead.
+- Learned words are written to disk a couple of seconds after they are learned. They were only
+  saved when the window moved, resized or closed, so a crash lost them.
 
 ## [0.1.0] - 2026-09-07
 

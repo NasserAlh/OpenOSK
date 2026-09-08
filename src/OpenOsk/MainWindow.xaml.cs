@@ -751,6 +751,7 @@ public partial class MainWindow : Window
         {
             var chip = (Button)PredictionPanel.Children[i];
             if (i < words.Count)
+            ScheduleSave();
             {
                 chip.Content = words[i];
                 chip.Visibility = Visibility.Visible;
