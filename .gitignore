@@ -1,0 +1,23 @@
+# .NET build output
+bin/
+obj/
+publish/
+out/
+*.user
+TestResults/
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
+$RECYCLE.BIN/
+
+# Local scratch
+*.log
+tmp/
