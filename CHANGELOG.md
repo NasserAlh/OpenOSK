@@ -5,6 +5,11 @@ All notable changes to OpenOSK are recorded here. The format follows
 
 ## [Unreleased]
 
+### Fixed
+
+- Holding a key now repeats at the rate set in Windows keyboard settings. The repeat timer ticked
+  late, so a key repeated at about 22 per second instead of 30.
+
 ## [0.1.0] - 2026-09-07
 
 First release.

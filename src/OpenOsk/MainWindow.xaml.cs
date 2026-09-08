@@ -34,6 +34,7 @@ public partial class MainWindow : Window
     private readonly LearnedWordsStore _learnedStore = new(AppPaths.LearnedWordsFile);
     private readonly DwellTracker _dwell;
     private readonly ScanController _scan = new();
+    private readonly KeyRepeater _repeater = new(TimeSpan.FromMilliseconds(500), TimeSpan.FromMilliseconds(33));
     private readonly Stopwatch _clock = Stopwatch.StartNew();
     private readonly DispatcherTimer _dwellTimer;
     private readonly DispatcherTimer _scanTimer;
@@ -53,7 +54,6 @@ public partial class MainWindow : Window
     private AppBar? _appBar;
     private KeyButton? _pressedButton;
     private KeyStrokePlan? _pressedPlan;
-    private bool _repeatDelayPassed;
     private bool _faded;
     private bool _pointerOver;
     private bool _docked;
@@ -77,7 +77,8 @@ public partial class MainWindow : Window
         _dwellTimer.Tick += OnDwellTick;
         _scanTimer = new DispatcherTimer(DispatcherPriority.Normal, Dispatcher) { Interval = TimeSpan.FromSeconds(settings.ScanSeconds) };
         _scanTimer.Tick += (_, _) => _scan.Tick();
-        _repeatTimer = new DispatcherTimer(DispatcherPriority.Input, Dispatcher);
+        // Ticks faster than any repeat rate; the KeyRepeater decides how many repeats each tick owes.
+        _repeatTimer = new DispatcherTimer(DispatcherPriority.Input, Dispatcher) { Interval = TimeSpan.FromMilliseconds(16) };
         _repeatTimer.Tick += OnRepeatTick;
         _saveTimer = new DispatcherTimer(DispatcherPriority.Background, Dispatcher) { Interval = TimeSpan.FromSeconds(2) };
         _saveTimer.Tick += (_, _) => { _saveTimer.Stop(); SavePlacement(); SaveSettings(); SaveLearnedWords(); };
@@ -432,8 +433,9 @@ public partial class MainWindow : Window
 
         if (_settings.KeyRepeat && plan.Repeat.Count > 0)
         {
-            _repeatDelayPassed = false;
-            _repeatTimer.Interval = RepeatDelay();
+            _repeater.Delay = RepeatDelay();
+            _repeater.Interval = RepeatInterval();
+            _repeater.Start(_clock.Elapsed);
             _repeatTimer.Start();
         }
     }
@@ -441,6 +443,7 @@ public partial class MainWindow : Window
     private void ReleaseKey()
     {
         _repeatTimer.Stop();
+        _repeater.Stop();
         if (_pressedButton is null)
         {
             return;
@@ -483,17 +486,25 @@ public partial class MainWindow : Window
         if (_pressedButton is null || _pressedPlan is null)
         {
             _repeatTimer.Stop();
+            _repeater.Stop();
             return;
         }
 
-        if (!_repeatDelayPassed)
+        var due = _repeater.Due(_clock.Elapsed);
+        if (due == 0)
         {
-            _repeatDelayPassed = true;
-            _repeatTimer.Interval = RepeatInterval();
+            return;
         }
 
-        TrackTyping(_pressedButton.Key);
-        _injector.Send(_pressedPlan.Repeat);
+        // Late ticks owe more than one repeat; send them as one batch so they cannot interleave.
+        var strokes = new List<KeyStroke>(due * _pressedPlan.Repeat.Count);
+        for (var i = 0; i < due; i++)
+        {
+            TrackTyping(_pressedButton.Key);
+            strokes.AddRange(_pressedPlan.Repeat);
+        }
+
+        _injector.Send(strokes);
     }
 
     /// <summary>Initial auto-repeat delay from the user's Windows keyboard settings (250 ms to 1 s).</summary>
