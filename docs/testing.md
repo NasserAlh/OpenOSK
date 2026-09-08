@@ -25,7 +25,7 @@ Open Notepad and click in it so the caret blinks.
 - [ ] 1.4 Tap **Shift**, then `a`: Notepad shows `A`, and Shift is no longer highlighted.
 - [ ] 1.5 Tap **Shift** twice (locked, solid highlight), type `abc`: Notepad shows `ABC`. Tap Shift again to release.
 - [ ] 1.6 Tap **Ctrl**, then `a`: everything in Notepad is selected. Then tap **Ctrl**, then `c`; click elsewhere; tap **Ctrl**, `v`: the text is pasted.
-- [ ] 1.7 Tap **Fn**: the number row shows F1–F12. Tap `F1` (was `1`): Notepad's help opens or nothing harmful happens. Tap **Fn** again to leave.
+- [ ] 1.7 Tap **Fn**: Fn highlights and the number row shows F1–F12. Tap `F5` (was `5`): Notepad inserts the time and date, and the row returns to numbers because Fn is one-shot like Shift. Tap **Fn** twice to lock it (solid highlight, the row stays F1–F12) and once more to release.
 - [ ] 1.8 Tap **Caps**: the Caps key turns solid and the letter labels become uppercase. Press Caps Lock on the physical keyboard: the on-screen indicator follows within a moment.
 - [ ] 1.9 Hold the physical Shift key: the on-screen Shift keys highlight and the labels change to their shifted symbols; release and they revert.
 - [ ] 1.10 Tap **Enter**, **Tab**, **Bksp**, **Del**, the arrows, **Home**, **End**: each acts as expected in Notepad.
