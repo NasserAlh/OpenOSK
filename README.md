@@ -54,7 +54,7 @@ dotnet test tests/OpenOsk.Core.Tests; dotnet publish src/OpenOsk/OpenOsk.csproj 
 ```
 
 `out\OpenOSK.exe` is the finished keyboard. See [CONTRIBUTING.md](CONTRIBUTING.md) for the
-project rules and [docs/layouts.md](docs/layouts.md) to add a layout.
+project rules and [docs/layouts.md](docs/layouts.md) to add a layout. [docs/testing.md](docs/testing.md) is the manual test plan for the Windows host.
 
 ## Limitations
 
