@@ -17,6 +17,8 @@ All notable changes to OpenOSK are recorded here. The format follows
   saved when the window moved, resized or closed, so a crash lost them.
 - In hover mode, closing the Options dialog no longer dwell-types (or reopens Options from) the
   key the pointer happens to rest on.
+- Long key labels (Options, PrtScn, Mv Up, Insert...) shrink to fit their key instead of being cut
+  to "Op...", and the minimum window height is 200 so the bottom row is never clipped.
 
 ## [0.1.0] - 2026-09-07
 

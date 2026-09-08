@@ -5,7 +5,7 @@
         Width="1000"
         Height="360"
         MinWidth="420"
-        MinHeight="160"
+        MinHeight="200"
         WindowStyle="None"
         AllowsTransparency="True"
         ResizeMode="CanResize"
