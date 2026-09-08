@@ -9,6 +9,8 @@ All notable changes to OpenOSK are recorded here. The format follows
 
 - Holding a key now repeats at the rate set in Windows keyboard settings. The repeat timer ticked
   late, so a key repeated at about 22 per second instead of 30.
+- Numeric key pad keys act as Home, End, the arrows, Insert and Delete while Num Lock is off, as
+  on a physical keyboard. They always typed digits.
 
 ## [0.1.0] - 2026-09-07
 

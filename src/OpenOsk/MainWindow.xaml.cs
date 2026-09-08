@@ -419,7 +419,7 @@ public partial class MainWindow : Window
                 break;
         }
 
-        var plan = KeyStrokePlanner.Plan(key, _modifiers);
+        var plan = KeyStrokePlanner.Plan(key, _modifiers, numLock: _monitor?.NumLock ?? true);
         if (plan.Press.Count == 0)
         {
             return;
