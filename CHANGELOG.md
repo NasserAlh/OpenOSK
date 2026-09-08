@@ -15,6 +15,8 @@ All notable changes to OpenOSK are recorded here. The format follows
   implementation set, so the window uses WPF's own opacity instead.
 - Learned words are written to disk a couple of seconds after they are learned. They were only
   saved when the window moved, resized or closed, so a crash lost them.
+- In hover mode, closing the Options dialog no longer dwell-types (or reopens Options from) the
+  key the pointer happens to rest on.
 
 ## [0.1.0] - 2026-09-07
 

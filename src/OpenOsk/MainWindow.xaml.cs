@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Threading;
 using OpenOsk.Controls;
 using OpenOsk.Core.Input;
@@ -53,6 +54,7 @@ public partial class MainWindow : Window
     private GlobalHotKey? _hotKey;
     private AppBar? _appBar;
     private KeyButton? _pressedButton;
+    private KeyButton? _dwellSuppressed;
     private KeyStrokePlan? _pressedPlan;
     private bool _faded;
     private bool _pointerOver;
@@ -335,7 +337,7 @@ public partial class MainWindow : Window
 
     private void OnKeyMouseEnter(object sender, MouseEventArgs e)
     {
-        if (_settings.TypingMode == TypingMode.Hover && sender is KeyButton button)
+        if (_settings.TypingMode == TypingMode.Hover && sender is KeyButton button && !ReferenceEquals(button, _dwellSuppressed))
         {
             _dwell.Enter(button.Key.Id, _clock.Elapsed);
         }
@@ -350,8 +352,38 @@ public partial class MainWindow : Window
                 _dwell.Leave();
             }
 
+            if (ReferenceEquals(button, _dwellSuppressed))
+            {
+                _dwellSuppressed = null;
+            }
+
             button.DwellProgress = 0;
         }
+    }
+
+    /// <summary>
+    /// When a dialog closes, WPF raises MouseEnter for whatever key the pointer happens to rest on,
+    /// which in hover mode would dwell-type that key (or reopen Options) a second later. Ignore that
+    /// key until the pointer leaves it.
+    /// </summary>
+    private void SuppressDwellUnderPointer()
+    {
+        _dwell.Leave();
+        _dwellSuppressed = null;
+
+        // Mouse.GetPosition is stale here (the dialog owned the pointer), so ask Win32 instead.
+        if (!NativeMethods.GetCursorPos(out var cursor))
+        {
+            return;
+        }
+
+        var hit = InputHitTest(PointFromScreen(new Point(cursor.X, cursor.Y))) as DependencyObject;
+        while (hit is not null and not KeyButton)
+        {
+            hit = VisualTreeHelper.GetParent(hit);
+        }
+
+        _dwellSuppressed = hit as KeyButton;
     }
 
     private void OnDwellTick(object? sender, EventArgs e)
@@ -719,6 +751,7 @@ public partial class MainWindow : Window
         {
             _predictor.Learn(word);
             _learnedDirty = true;
+            ScheduleSave();
         }
     }
 
@@ -751,7 +784,6 @@ public partial class MainWindow : Window
         {
             var chip = (Button)PredictionPanel.Children[i];
             if (i < words.Count)
-            ScheduleSave();
             {
                 chip.Content = words[i];
                 chip.Visibility = Visibility.Visible;
@@ -962,6 +994,8 @@ public partial class MainWindow : Window
 
             ApplySettings(save: true);
         }
+
+        SuppressDwellUnderPointer();
     }
 
     // ---------------------------------------------------------------------------------------------
