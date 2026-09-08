@@ -19,6 +19,8 @@ All notable changes to OpenOSK are recorded here. The format follows
   key the pointer happens to rest on.
 - Long key labels (Options, PrtScn, Mv Up, Insert...) shrink to fit their key instead of being cut
   to "Op...", and the minimum window height is 200 so the bottom row is never clipped.
+- The word-suggestion row sizes itself to its chips; at a fixed height the words were drawn half
+  under the key rows.
 
 ## [0.1.0] - 2026-09-07
 

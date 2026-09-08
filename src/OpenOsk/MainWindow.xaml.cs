@@ -273,7 +273,7 @@ public partial class MainWindow : Window
         var unitWidth = MainBlock.ActualWidth > 0 ? MainBlock.ActualWidth / _layout.MainWidthUnits : rowHeight;
         var size = Math.Clamp(Math.Min(rowHeight * 0.36, unitWidth * 0.42), 9, 40);
         TextElement.SetFontSize(KeysHost, size);
-        TextElement.SetFontSize(PredictionBar, Math.Clamp(size * 0.8, 11, 22));
+        TextElement.SetFontSize(PredictionBar, Math.Clamp(size * 0.7, 11, 18));
     }
 
     // ---------------------------------------------------------------------------------------------
