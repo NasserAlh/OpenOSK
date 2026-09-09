@@ -105,6 +105,21 @@ None (dark.theme, accessibility flags 126, apps in dark mode), no `Run\OpenOSK` 
 | 10.2 | PASS | Against an elevated `cmd.exe` (token integrity 0x3000, launched through Run + Ctrl+Shift+Enter and a UAC prompt accepted by hand) tapping a, b, c and Enter left an empty prompt; the elevated window stayed foreground; OpenOSK stayed responsive and no error.log was created. Notepad then received `ok`, Enter, `again`. Windows 11's packaged Notepad cannot serve this step: after Yes on UAC it still runs at medium integrity. | |
 | 10.4 | PASS | The Run value was `"C:\Users\nasser\Dev\OpenOSK\out\OpenOSK.exe"`; executing that line with the keyboard minimised restored it with one process. After a sign-out and sign-in, one keyboard appeared (reported by hand) and the script saw one process and no error.log. | |
 
+## Release v0.1.0 — 2026-09-10
+
+Tag `v0.1.0` was placed on `1d0c905` and pushed on 2026-09-09 at 22:54 UTC. The Build workflow run
+34414463547 (core tests on Ubuntu and Windows, publish win-x64 and win-arm64, GitHub release)
+completed successfully and published the release at 22:58 UTC with four assets:
+`OpenOSK-win-x64.exe`, `OpenOSK-win-arm64.exe` and their `.sha256` files.
+
+| Check | Result | Observation |
+|---|---|---|
+| x64 checksum | PASS | `OpenOSK-win-x64.exe` (71,947,295 bytes) hashed to the value in `OpenOSK-win-x64.exe.sha256`. |
+| x64 launch | PASS | On the pass-2 machine the released exe (file version 0.1.0.0) opened one window at its saved place, 1236 × 492 px, with the NOACTIVATE, TOPMOST and APPWINDOW styles, and reported responding. |
+| x64 single instance | PASS | Launching the same exe a second time left one process. |
+| x64 close | PASS | Closing through the window left zero processes, a valid settings.json and no error.log. |
+| Arm64 | NOT RUN | No Arm64 device. |
+
 ## Fixes made during verification
 
 | Commit | Step | What changed |
