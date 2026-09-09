@@ -56,9 +56,10 @@ WizardStyle=modern
 UninstallDisplayName={#AppName}
 UninstallDisplayIcon={app}\{#AppExeName}
 ; A running keyboard is closed (via Restart Manager) before files are replaced on upgrade.
+; Do not add AppMutex: with it Setup refuses to continue while the keyboard runs instead of
+; closing it, which made the first upgrade test fail.
 CloseApplications=yes
 RestartApplications=no
-AppMutex=Local\OpenOSK.SingleInstance
 #ifexist IconFile
 SetupIconFile={#IconFile}
 #endif
