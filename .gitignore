@@ -21,3 +21,6 @@ $RECYCLE.BIN/
 # Local scratch
 *.log
 tmp/
+
+# Address of the private status board; the tracked .claude/gate-board.json keeps board_url empty
+.claude/gate-board.local.json
