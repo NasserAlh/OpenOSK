@@ -33,7 +33,10 @@ Build it locally with Inno Setup installed:
 dotnet publish src\OpenOsk\OpenOsk.csproj -c Release -r win-x64 -o publish\win-x64; & "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe" /DAppVersion=0.1.0 /DArch=win-x64 "/DPublishDir=$PWD\publish\win-x64" packaging\inno\OpenOSK.iss
 ```
 
-The result is `publish\installer\OpenOSK-Setup-win-x64.exe`. Silent install and uninstall use the
+The result is `publish\installer\OpenOSK-Setup-win-x64.exe`. A per-user Inno Setup install
+(`winget install JRSoftware.InnoSetup --scope user`, no administrator rights) puts `ISCC.exe` in
+`%LOCALAPPDATA%\Programs\Inno Setup 6` instead of Program Files (x86); adjust the path above.
+Silent install and uninstall use the
 standard Inno switches: `/VERYSILENT /NORESTART` and, for uninstall,
 `"%LOCALAPPDATA%\Programs\OpenOSK\unins000.exe" /VERYSILENT`.
 
