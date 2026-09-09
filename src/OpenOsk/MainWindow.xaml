@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="OpenOSK"
+        Icon="Assets/OpenOSK.ico"
         Width="1000"
         Height="360"
         MinWidth="420"
@@ -40,7 +41,7 @@
     <!-- Title bar -->
     <Grid Grid.Row="0" Background="{DynamicResource TitleBackground}">
       <StackPanel Orientation="Horizontal" Margin="10,0,0,0" VerticalAlignment="Center">
-        <TextBlock Text="&#xE765;" FontFamily="{StaticResource IconFont}" FontSize="13" VerticalAlignment="Center" Foreground="{DynamicResource TitleForeground}" />
+        <Image Source="Assets/OpenOSK.ico" Width="16" Height="16" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality" />
         <TextBlock Text="OpenOSK" Margin="8,0,0,0" FontSize="12" VerticalAlignment="Center" Foreground="{DynamicResource TitleForeground}" />
         <TextBlock x:Name="ModeLabel" Margin="10,0,0,0" FontSize="11" VerticalAlignment="Center" Opacity="0.7" Foreground="{DynamicResource TitleForeground}" />
       </StackPanel>
