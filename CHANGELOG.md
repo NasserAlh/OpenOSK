@@ -21,6 +21,8 @@ All notable changes to OpenOSK are recorded here. The format follows
   to "Op...", and the minimum window height is 200 so the bottom row is never clipped.
 - The word-suggestion row sizes itself to its chips; at a fixed height the words were drawn half
   under the key rows.
+- The small corner label (the shifted symbol) is hidden when the keys are too small for two
+  labels, instead of overlapping the main label.
 
 ## [0.1.0] - 2026-09-07
 

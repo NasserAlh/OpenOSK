@@ -36,7 +36,8 @@
                            FontSize="{TemplateBinding FontSize}"
                            TextAlignment="Center" />
               </Viewbox>
-              <TextBlock Text="{TemplateBinding SubLabel}"
+              <TextBlock x:Name="Sub"
+                         Text="{TemplateBinding SubLabel}"
                          HorizontalAlignment="Right"
                          VerticalAlignment="Top"
                          Margin="0,1,5,0"
@@ -57,6 +58,9 @@
             </Grid>
           </Border>
           <ControlTemplate.Triggers>
+            <Trigger Property="ShowSubLabel" Value="False">
+              <Setter TargetName="Sub" Property="Visibility" Value="Collapsed" />
+            </Trigger>
             <Trigger Property="KeyKind" Value="{x:Static k:KeyKind.Action}">
               <Setter TargetName="Root" Property="Background" Value="{DynamicResource ActionKeyBackground}" />
             </Trigger>
