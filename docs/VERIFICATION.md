@@ -134,7 +134,7 @@ Installer built locally with Inno Setup 6.7.3 from the tree at `b912271` (icon a
 | 11.4 | PASS | Settings › Apps › Installed apps › … › Uninstall › Uninstall started the uninstaller. "Completely remove?" Yes, "Also delete settings and learned words?" No: program folder, Start menu entry, Run value and uninstall key gone, `%LOCALAPPDATA%\OpenOSK` kept. Reinstalled and repeated answering Yes: the data folder was removed as well. | |
 | 11.5 | PASS | After a reinstall and one run, `unins000.exe /VERYSILENT` removed the program, Start menu entry, Run value and uninstall key with no window and kept `%LOCALAPPDATA%\OpenOSK`. | |
 
-Also on 2026-10: the application icon (`b912271`) was seen in the main title bar, the taskbar
+Also on 2026-09-10: the application icon (`b912271`) was seen in the main title bar, the taskbar
 button, the Options window's title bar and Alt+Tab.
 
 ## Fixes made during verification
