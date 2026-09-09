@@ -5,7 +5,25 @@ All notable changes to OpenOSK are recorded here. The format follows
 
 ## [Unreleased]
 
-### Fixed
+## [0.1.0] - 2026-09-09
+
+First release.
+
+### Added
+
+- Standard keyboard with Fn row, sticky modifiers, lock indicators, auto-repeat and an optional
+  numeric key pad.
+- Labels that follow the active input language of the foreground application.
+- Click, hover (dwell) and scan typing modes with the same ranges as the Windows OSK.
+- Nav / Gen, Mv Up, Mv Dn, Dock (shell app bar) and Fade commands.
+- Local word prediction with learned words, "insert space after prediction" and a forget button.
+- Options dialog mirroring the Windows OSK plus theme, fade opacity, key repeat, modifier lock,
+  custom layouts and start-at-sign-in.
+- Light, dark and high-contrast themes following the Windows setting.
+- Single-instance behaviour, `--nav` and `--dock` switches.
+- Self-contained single-file builds for x64 and Arm64 from GitHub Actions.
+
+### Fixed before release (found by the first Windows test pass)
 
 - Holding a key now repeats at the rate set in Windows keyboard settings. The repeat timer ticked
   late, so a key repeated at about 22 per second instead of 30.
@@ -23,21 +41,3 @@ All notable changes to OpenOSK are recorded here. The format follows
   under the key rows.
 - The small corner label (the shifted symbol) is hidden when the keys are too small for two
   labels, instead of overlapping the main label.
-
-## [0.1.0] - 2026-09-07
-
-First release.
-
-### Added
-
-- Standard keyboard with Fn row, sticky modifiers, lock indicators, auto-repeat and an optional
-  numeric key pad.
-- Labels that follow the active input language of the foreground application.
-- Click, hover (dwell) and scan typing modes with the same ranges as the Windows OSK.
-- Nav / Gen, Mv Up, Mv Dn, Dock (shell app bar) and Fade commands.
-- Local word prediction with learned words, "insert space after prediction" and a forget button.
-- Options dialog mirroring the Windows OSK plus theme, fade opacity, key repeat, modifier lock,
-  custom layouts and start-at-sign-in.
-- Light, dark and high-contrast themes following the Windows setting.
-- Single-instance behaviour, `--nav` and `--dock` switches.
-- Self-contained single-file builds for x64 and Arm64 from GitHub Actions.
