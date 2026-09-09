@@ -137,6 +137,20 @@ Installer built locally with Inno Setup 6.7.3 from the tree at `b912271` (icon a
 Also on 2026-09-10: the application icon (`b912271`) was seen in the main title bar, the taskbar
 button, the Options window's title bar and Alt+Tab.
 
+## Release v0.1.0 re-cut — 2026-09-10
+
+The 2026-09-09 release (tag on `1d0c905`, four assets) was deleted together with its tag, and
+`v0.1.0` was re-tagged on `297e810` so the release carries the installer and the icon. Workflow run
+34418538912 succeeded and published the release at 23:54 UTC with eight assets:
+`OpenOSK-Setup-win-x64.exe`, `OpenOSK-Setup-win-arm64.exe`, `OpenOSK-win-x64.exe`,
+`OpenOSK-win-arm64.exe` and a `.sha256` for each.
+
+| Check | Result | Observation |
+|---|---|---|
+| x64 setup checksum | PASS | `OpenOSK-Setup-win-x64.exe` (66,675,597 bytes) downloaded from the release hashed to the value in its `.sha256`. |
+| x64 setup install | PASS | Installed without a UAC prompt; Installed apps shows "OpenOSK 0.1.0, OpenOSK contributors" with the keyboard icon; the Start menu entry exists and launched the keyboard from `%LOCALAPPDATA%\Programs\OpenOSK\OpenOSK.exe` (file version 0.1.0.0), which typed `release ok` into Notepad. No error.log. |
+| Arm64 assets | NOT RUN | No Arm64 device. |
+
 ## Fixes made during verification
 
 | Commit | Step | What changed |
