@@ -5,6 +5,12 @@ All notable changes to OpenOSK are recorded here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- A per-user installer (`OpenOSK-Setup-<arch>.exe`, Inno Setup) with Start menu entry,
+  Installed-apps entry, optional start-at-sign-in and in-place updates, published beside the
+  portable executables. See docs/packaging.md.
+
 ## [0.1.0] - 2026-09-09
 
 First release.

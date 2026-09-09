@@ -18,11 +18,17 @@ anything to Microsoft.
 
 ## Install
 
-Download `OpenOSK-win-x64.exe` (or `-win-arm64`) from the Releases page and run it. It is a single
-self-contained file; nothing else is installed and there is no runtime to download. To start it
-with Windows, tick *Start OpenOSK when I sign in* in Options.
+From the [Releases](https://github.com/NasserAlh/OpenOSK/releases) page, download either:
 
-Verify the download with the `.sha256` file published beside it.
+- **`OpenOSK-Setup-win-x64.exe`** (or `-win-arm64`): a per-user installer. No administrator
+  rights needed. Adds OpenOSK to the Start menu and to *Installed apps*, offers *Start OpenOSK when I
+  sign in*, and updates in place when you run a newer setup. Uninstall from Settings → Apps.
+- **`OpenOSK-win-x64.exe`** (or `-win-arm64`): the same keyboard as one portable file. Nothing is
+  installed; run it from any folder. Tick *Start OpenOSK when I sign in* in Options if you want it
+  at sign-in.
+
+Both are self-contained; there is no runtime to download. Verify a download with the `.sha256`
+file published beside it. See [docs/packaging.md](docs/packaging.md) for details and winget.
 
 ## Use
 
