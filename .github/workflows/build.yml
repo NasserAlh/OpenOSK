@@ -2,8 +2,9 @@ name: Build
 
 on:
   push:
+    # No path filter here: GitHub also applies it to tag pushes, and a tag on a docs-only commit
+    # must still build the release.
     branches: [main]
-    paths-ignore: ["**.md", "docs/**"]
     tags: ["v*"]
   pull_request:
     paths-ignore: ["**.md", "docs/**"]
