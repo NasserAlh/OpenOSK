@@ -120,6 +120,23 @@ completed successfully and published the release at 22:58 UTC with four assets:
 | x64 close | PASS | Closing through the window left zero processes, a valid settings.json and no error.log. |
 | Arm64 | NOT RUN | No Arm64 device. |
 
+## Pass 3 — 2026-09-10, the installer (section 11)
+
+Installer built locally with Inno Setup 6.7.3 from the tree at `b912271` (icon added) and, for
+11.2 onwards, from `75367ab` (the `AppMutex` fix). Every step ran without a UAC prompt
+(`consent.exe` was polled throughout and never appeared).
+
+| Step | Result | Observation | Fix |
+|---|---|---|---|
+| 11.1 | PASS | The wizard offered *Install for me only*, installed to `%LOCALAPPDATA%\Programs\OpenOSK` (OpenOSK.exe, LICENSE.txt, unins000.*) and launched the keyboard from there. Start menu `OpenOSK.lnk` present; Installed apps showed "OpenOSK 0.1.0, OpenOSK contributors" with the blue keyboard icon; `Run\OpenOSK` = `"C:\Users\<user>\AppData\Local\Programs\OpenOSK\OpenOSK.exe"`. | |
+| 11.2 | FAIL → PASS | Before: the 0.1.1 setup stopped at "Setup has detected that OpenOSK is currently running. Please close all instances…" (the `AppMutex` check). After the fix: no prompt, the keyboard process disappeared during the Installing page and Finish started a new one from the same path, `settings.json` was byte-identical before and after, Installed apps showed 0.1.1, the Run value was kept. | `75367ab` |
+| 11.3 | PASS | `/VERYSILENT /NORESTART` with the keyboard running: exit code 0 after 2 s, no visible window from the setup process, keyboard closed and not relaunched, the four installed files present. | |
+| 11.4 | PASS | Settings › Apps › Installed apps › … › Uninstall › Uninstall started the uninstaller. "Completely remove?" Yes, "Also delete settings and learned words?" No: program folder, Start menu entry, Run value and uninstall key gone, `%LOCALAPPDATA%\OpenOSK` kept. Reinstalled and repeated answering Yes: the data folder was removed as well. | |
+| 11.5 | PASS | After a reinstall and one run, `unins000.exe /VERYSILENT` removed the program, Start menu entry, Run value and uninstall key with no window and kept `%LOCALAPPDATA%\OpenOSK`. | |
+
+Also on 2026-10: the application icon (`b912271`) was seen in the main title bar, the taskbar
+button, the Options window's title bar and Alt+Tab.
+
 ## Fixes made during verification
 
 | Commit | Step | What changed |

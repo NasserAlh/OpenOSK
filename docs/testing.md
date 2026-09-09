@@ -109,6 +109,18 @@ Only if a second keyboard layout is installed (Settings → Time & language → 
 - [ ] 10.3 Corrupt `settings.json` (e.g. replace its contents with `{`) and start OpenOSK: it starts with defaults and rewrites the file on the next change.
 - [ ] 10.4 Sign out and back in with start-at-sign-in enabled: exactly one keyboard appears.
 
+## 11. Installer
+
+Build `publish\installer\OpenOSK-Setup-win-x64.exe` as described in [packaging.md](packaging.md),
+once with `/DAppVersion=0.1.0` and once with `/DAppVersion=0.1.1` (keep both). Start with nothing
+installed and no `HKCU\...\Run\OpenOSK` value.
+
+- [ ] 11.1 Run the 0.1.0 setup: no UAC prompt; choose *Install for me only*; tick *Start OpenOSK when I sign in*; finish with *Launch OpenOSK*. The keyboard appears from `%LOCALAPPDATA%\Programs\OpenOSK\OpenOSK.exe`, the Start menu has **OpenOSK**, Settings → Apps → Installed apps lists OpenOSK 0.1.0 with its icon, and `HKCU\...\Run\OpenOSK` is the quoted, expanded path to that exe.
+- [ ] 11.2 With the keyboard running, run the 0.1.1 setup: no "OpenOSK is currently running" prompt; the wizard closes the keyboard while installing and *Launch* starts it again; `settings.json` is unchanged; Installed apps shows 0.1.1; the Run value is still there.
+- [ ] 11.3 `OpenOSK-Setup-win-x64.exe /VERYSILENT /NORESTART` with the keyboard running: no window of any kind, exit code 0, the keyboard is closed and not relaunched, the installation is intact.
+- [ ] 11.4 Uninstall from Installed apps (… → Uninstall → Uninstall): no UAC prompt; answer **Yes** to "completely remove" and **No** to "Also delete your OpenOSK settings and learned words?". The program folder, the Start menu entry, the Run value and the Installed-apps entry are gone; `%LOCALAPPDATA%\OpenOSK` still exists. Install again, run the keyboard once, uninstall again answering **Yes**: the data folder is gone too.
+- [ ] 11.5 Install again, run the keyboard once and close it, then `"%LOCALAPPDATA%\Programs\OpenOSK\unins000.exe" /VERYSILENT`: the program is removed without any window and `%LOCALAPPDATA%\OpenOSK` is kept.
+
 ## Reporting
 
 Include: Windows version and build, x64 or Arm64, the step number, what you expected, what
