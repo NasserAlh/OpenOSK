@@ -17,6 +17,7 @@
     "rules": "CONTRIBUTING.md",
     "requirements": "docs/feature-parity.md",
     "design": "docs/architecture.md",
+    "distribution": "docs/packaging.md",
     "procedure": "docs/testing.md",
     "evidence": "docs/VERIFICATION.md"
   }
